@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+</body>
+  <!-- <script src="../../src/rescroll.js"></script> -->
+  <script src="../../dist/rescroll.js"></script>
+  <script>
+    (function() {
+      //find anchors
+      window.onload = function() {
+        console.log('ready');
+        for (var i = 0; i < 20; i++) {
+          document.body.innerHTML += '<h1 class="sr-anchor-box">' + i + ' Header</h1> \
+          <p class="sr-anchor-box">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend lectus et nunc congue gravida. Phasellus et iaculis risus, ut scelerisque dolor. Sed diam diam, tempor et feugiat a, pharetra sed nulla. Duis non lacinia odio, vitae ultricies dui. Ut sit amet dui quis lectus cursus laoreet et in magna. Nulla rutrum nisi urna, sit amet faucibus felis placerat ac. Cras commodo aliquam purus, eget gravida magna lacinia non. Sed facilisis, eros iaculis rhoncus adipiscing, dolor augue fermentum risus, vel vulputate massa metus ac erat.\
+          Pellentesque libero justo, pellentesque non neque a, ultricies eleifend lectus. Aenean a nisl mauris. Aliquam erat volutpat. Nulla et viverra nisi, sit amet venenatis leo. Quisque aliquam sed leo eu pretium. Maecenas a lobortis lacus. Aenean lacinia scelerisque aliquam. Vestibulum pretium consequat enim at lacinia. Suspendisse pretium nulla quis lacus accumsan consectetur. In hac habitasse platea dictumst.\
+          In risus ipsum, facilisis sit amet scelerisque imperdiet, vulputate ac erat. Quisque sed ipsum ornare, euismod quam vel, eleifend metus. Praesent ut fermentum augue. Sed sodales mollis arcu. Etiam quis erat dignissim, posuere tortor at, ullamcorper orci. Integer sodales, lectus a venenatis scelerisque, ipsum augue tempus augue, non vulputate nibh nunc ac est. Vestibulum accumsan arcu ut semper dapibus. Fusce mattis turpis et ante adipiscing, a mattis ipsum vestibulum. Aliquam non eros lobortis augue dapibus consectetur. Praesent sit amet nulla eu ligula elementum dapibus.\
+          Quisque id sapien vel neque malesuada cursus non dictum enim. Nam tincidunt eu ante ut imperdiet. Sed odio erat, mattis non leo eget, varius ultricies ipsum. Nulla porta est eu eros interdum dapibus. Sed a odio nisi. Sed eu vestibulum neque. Ut luctus risus nulla. Aenean dignissim porta sem, vitae dictum turpis iaculis a. Integer purus purus, dictum vitae consectetur sed, sollicitudin at enim.\
+          </p>\
+          <img class="sr-anchor-box" style="width:100%;" src="http://p1.pichost.me/i/7/1304958.jpg">\
+          <p class="sr-anchor-box">\
+            Cras sed nunc eget eros dapibus placerat. Fusce suscipit, nulla id elementum euismod, velit elit tincidunt leo, non bibendum magna nisl a diam. Donec lorem enim, tristique sed mi et, mollis luctus risus. In rutrum a magna non cursus. Duis malesuada varius elit eu hendrerit. Vivamus sed consequat augue. Proin ligula lectus, lacinia eu elementum sed, lacinia a nisi.\
+            Vestibulum porttitor gravida lectus vitae cursus. Sed mauris orci, aliquam in sodales vel, consectetur vitae dui. Phasellus auctor sollicitudin massa sed imperdiet. Nulla venenatis nisl molestie, consectetur metus eget, luctus lorem. Nullam blandit ut felis id consequat. Aliquam semper accumsan condimentum. Donec eu sodales mauris. Phasellus sagittis tellus sit amet purus venenatis, pellentesque convallis tellus porttitor. Etiam dictum dui nec adipiscing tincidunt. Curabitur viverra pretium est. Maecenas ligula purus, faucibus vitae mauris et, suscipit imperdiet tellus. Ut id feugiat lacus. Vivamus sed orci posuere, convallis nunc at, volutpat felis. Sed gravida libero nibh, nec mattis tortor tempus vel.\
+          </p>'
+        };
+
+        setTimeout(function() {
+          var anchors = [];
+          var boxes = document.querySelectorAll('.sr-anchor-box');
+          for (var i = 0; i < boxes.length; i++)
+            anchors.push({
+              element: boxes[i],
+              type: 'Box'
+            });
+          var texts = document.querySelectorAll('.sr-anchor-text');
+          for (var i = 0; i < texts.length; i++)
+            anchors.push({
+              element: texts[i],
+              type: 'Text'
+            });
+          console.log(anchors);
+          require('InitRescroll')({
+            resizeTarget: window,
+            scrollTarget: document.body,
+            anchors: anchors
+          });
+        });
+      };
+    })();
+  </script>
+</html>
