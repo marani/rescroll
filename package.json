@@ -4,7 +4,7 @@
   "description": "Scroll viewport back to focused element on resize event",
   "main": "examples.js",
   "scripts": {
-    "build": "browserify -s InitRescroll -do ./dist/rescroll.js ./src/rescroll.js"
+    "build": "browserify -s InitRescroll -do ./dist/rescroll.js ./src/rescroll.js && uglifyjs -m -c -o ./dist/rescroll.min.js ./dist/rescroll.js"
   },
   "author": "",
   "license": "MIT",
