@@ -1,6 +1,6 @@
-## Rescroll = REsize + SROLL back
+#### Rescroll = REsize + SROLL back
 
-A tiny module to get resize done right on responsive webpages.
+A tiny module to fix resizing on responsive webpages.
 
 #### Usage
 
