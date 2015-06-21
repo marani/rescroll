@@ -36,8 +36,8 @@ var Processor = {
       // find sub boxes
       var centerElement = document.elementFromPoint(center.x, center.y);
       // switch focused node finder based on element types:
-      //   1. text: find all text node
-      //   2. box:
+      //   1. text: use bounding rect of each descendant text node
+      //   2. box: use bounding rect of itself
       // find focus based on center type
 
       // TODO: separate normal box & text box,
@@ -50,12 +50,8 @@ var Processor = {
       // search through anchor list
       // find smallest element inside anchors array
       // that contains center coordinate
-      // based on type, find focus
+      // then find focus based on best element
 
-      // var best = {
-      //   anchor: anchors[0],
-      //   rect: this.Box.getBoundingRect(anchors[0])
-      // };
       var best = {
         anchor: null,
         value: window.innerHeight
@@ -243,7 +239,7 @@ function InitRescroll(options) {
       y: centerNormalized.rY * vp.h
     };
     focus = Processor.focus(anchors, center);
-    console.log('focus', focus);
+    // console.log('focus', focus);
   }
 
   function rescroll() {
@@ -261,7 +257,7 @@ function InitRescroll(options) {
     scrollTarget.scrollTop += delta;
     if (Math.abs(delta) >= 0.5)
       allowUpdate = false;
-    console.log('delta', delta, '-> allowUpdate', allowUpdate);
+    // console.log('delta', delta, '-> allowUpdate', allowUpdate);
   }
 
   function getAnchor() {}

@@ -1,7 +1,7 @@
 {
-  "name": "re-scroll",
+  "name": "rescroll",
   "version": "0.0.1",
-  "description": "Scroll viewport back to focused element on resize event",
+  "description": "Scroll viewport back to focused element on Resize events",
   "main": "./src/rescroll.js",
   "scripts": {
     "jshint": "jshint ./src",
@@ -11,7 +11,6 @@
   "license": "MIT",
   "devDependencies": {
     "browserify": "^10.2.4",
-    "connect": "^3.3.5",
     "jshint": "^2.8.0",
     "uglify-js": "^2.4.23",
     "watchify": "^3.2.2"
