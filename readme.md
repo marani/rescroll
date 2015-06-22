@@ -44,7 +44,7 @@ for (var i = 0; i < boxes.length; i++)
     element: boxes[i],
     type: 'Box'
   });
-CreateReflowEngine({
+InitRescroll({
   anchors: anchors
 });
 ```
