@@ -22,6 +22,16 @@ var Utils = {
       viewPortHeight = document.getElementsByTagName('body')[0].clientHeight;
     }
     return {w: viewPortWidth, h: viewPortHeight};
+  },
+  documentScrollTarget: function () {
+    document.body.scrollTop += 1;
+    if (document.body.scrollTop === 0) {
+      return 'documentElement';
+    }
+    else {
+      document.body.scrollTop -= 1;
+      return 'body';
+    }
   }
 };
 
@@ -192,7 +202,7 @@ var Processor = {
 
 function InitRescroll(options) {
   var defaultOptions = {
-    scrollTarget: document.body,
+    scrollTarget: document[Utils.documentScrollTarget()],
     resizeTarget: window,
     anchors: null,
     center: {
@@ -239,7 +249,6 @@ function InitRescroll(options) {
       y: centerNormalized.rY * vp.h
     };
     focus = Processor.focus(anchors, center);
-    // console.log('focus', focus);
   }
 
   function rescroll() {
@@ -257,7 +266,6 @@ function InitRescroll(options) {
     scrollTarget.scrollTop += delta;
     if (Math.abs(delta) >= 0.5)
       allowUpdate = false;
-    // console.log('delta', delta, '-> allowUpdate', allowUpdate);
   }
 
   function getAnchor() {}
@@ -268,9 +276,6 @@ function InitRescroll(options) {
   function allowUpdate() {}
 
   function init() {
-    //set up rescroller instance
-    //  2. bind anchors
-    //  3. bind onscroll & onresize
     options = options || {};
     window.addEventListener('resize', function() {
       if (focus)
@@ -291,11 +296,11 @@ function InitRescroll(options) {
   // public methods
   api.rescroll = rescroll;
   api.updateFocus = updateFocus;
-  api.getAnchor = getAnchor;
-  api.setAnchor = setAnchor;
-  api.addAnchor = addAnchor;
-  api.removeAnchor = removeAnchor;
-  api.bindAnchor = bindAnchor;
+  // api.getAnchor = getAnchor;
+  // api.setAnchor = setAnchor;
+  // api.addAnchor = addAnchor;
+  // api.removeAnchor = removeAnchor;
+  // api.bindAnchor = bindAnchor;
   return api;
 };
 

@@ -4,6 +4,7 @@
   "description": "Scroll viewport back to focused element on Resize events",
   "main": "./src/rescroll.js",
   "scripts": {
+    "dev": "watchify -s InitRescroll -do ./dist/rescroll.js ./src/rescroll.js",
     "jshint": "jshint ./src",
     "build": "browserify -s InitRescroll -do ./dist/rescroll.js ./src/rescroll.js && uglifyjs -m -c -o ./dist/rescroll.min.js ./dist/rescroll.js"
   },
