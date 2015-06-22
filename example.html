@@ -4,7 +4,7 @@
   <style>
     * {
       font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-      color: #454545;
+      color: #969696;
     }
     body {
       padding: 20px;
@@ -14,6 +14,7 @@
     a {
       text-decoration: none;
       color: #ac4545;
+      cursor: pointer;
     }
     a:hover {
       text-decoration: underline;
@@ -29,11 +30,37 @@
       margin-left: auto;
       margin-right: auto;
     }
+    .head {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      padding-left: 20px;
+      border-bottom: 1px solid #ccc;
+      background: #fff;
+    }
+    .head h1 {
+      padding: 10px;
+      margin: 0;
+    }
+    .head .back {
+      padding-right: 15px;
+      border-right: 1px solid #ccc;
+    }
+    .head .title {
+      padding-left: 15px;
+    }
   </style>
   <title></title>
 </head>
 <body>
-  <h1>Scroll down then Resize. <a href="index.html">Back</a></h1>
+  <div class="head">
+    <h1>
+      <a class="back" href="index.html">Back</a>
+      <span class="title">Rescroll</span>
+      <a class="switch-on">on</a>
+      <a class="switch-off" style="color: #969696">off</a>
+    </h1>
   <script src="./dist/rescroll.js"></script>
   <script>
     (function() {
@@ -52,7 +79,7 @@
             Vestibulum porttitor gravida lectus vitae cursus. Sed mauris orci, aliquam in sodales vel, consectetur vitae dui. Phasellus auctor sollicitudin massa sed imperdiet. Nulla venenatis nisl molestie, consectetur metus eget, luctus lorem. Nullam blandit ut felis id consequat. Aliquam semper accumsan condimentum. Donec eu sodales mauris. Phasellus sagittis tellus sit amet purus venenatis, pellentesque convallis tellus porttitor. Etiam dictum dui nec adipiscing tincidunt. Curabitur viverra pretium est. Maecenas ligula purus, faucibus vitae mauris et, suscipit imperdiet tellus. Ut id feugiat lacus. Vivamus sed orci posuere, convallis nunc at, volutpat felis. Sed gravida libero nibh, nec mattis tortor tempus vel.\
           </p>'
         };
-
+        var rescroll;
         setTimeout(function() {
           var anchors = [];
           var boxes = document.querySelectorAll('.box');
@@ -61,10 +88,23 @@
               element: boxes[i],
               type: 'Box'
             });
-          InitRescroll({
+          rescroll = InitRescroll({
             anchors: anchors
           });
         });
+
+        var on = document.querySelector(".switch-on");
+        var off = document.querySelector(".switch-off");
+        on.onclick = function() {
+          off.style.color = '#969696';
+          on.style.color = '#ac4545';
+          rescroll.activate();
+        }
+        off.onclick = function() {
+          on.style.color = '#969696';
+          off.style.color = '#ac4545';
+          rescroll.deactivate();
+        }
       };
     })();
   </script>

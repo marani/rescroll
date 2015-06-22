@@ -235,11 +235,13 @@ function InitRescroll(options) {
 
   // exposed api
   var api = {};
-
   // prevent scroll handler from handling scroll event created
   // by rescroll in resize handler
   var allowUpdate = true;
   var focus = null;
+
+  // activate & deactivate
+  var active = true;
 
   // private methods
   function updateFocus() {
@@ -275,13 +277,23 @@ function InitRescroll(options) {
   function bindAnchor() {}
   function allowUpdate() {}
 
+  function activate() {
+    active = true;
+    updateFocus();
+  }
+
+  function deactivate() {
+    active = false;
+  }
+
   function init() {
     options = options || {};
     window.addEventListener('resize', function() {
-      if (focus)
-        rescroll();
+      if (!active) return;
+      if (focus) rescroll();
     });
     window.addEventListener('scroll', function() {
+      if (!active) return;
       if (!allowUpdate) {
         allowUpdate = true;
         return;
@@ -296,6 +308,8 @@ function InitRescroll(options) {
   // public methods
   api.rescroll = rescroll;
   api.updateFocus = updateFocus;
+  api.activate = activate;
+  api.deactivate = deactivate;
   // api.getAnchor = getAnchor;
   // api.setAnchor = setAnchor;
   // api.addAnchor = addAnchor;

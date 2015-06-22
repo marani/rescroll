@@ -17,7 +17,7 @@ With browserify
 npm install rescroll
 ```
 
-#### API Docs
+#### Usage
 
 Rescroll exposes a global function `InitRescroll` which accepts the follow parameters:
 - `resizeTarget`: element whose resize event will cause changes or reflow to other elements, default is `window`

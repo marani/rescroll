@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Scroll viewport back to focused element on Resize events",
   "main": "./src/rescroll.js",
+  "author": "Will Parry",
   "scripts": {
     "dev": "watchify -s InitRescroll -do ./dist/rescroll.js ./src/rescroll.js",
     "jshint": "jshint ./src",
