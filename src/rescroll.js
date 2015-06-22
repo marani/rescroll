@@ -284,6 +284,7 @@ function InitRescroll(options) {
         updateFocus();
       }
     });
+    updateFocus();
   }
 
   init();
