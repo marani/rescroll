@@ -1,7 +1,7 @@
 #### Rescroll
 
 A tiny module to fix resize problem on responsive webpages.
-See [Demo](marani.github.io/rescroll)
+See [Demo](https://marani.github.io/rescroll)
 
 #### Install
 
