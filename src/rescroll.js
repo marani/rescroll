@@ -100,7 +100,7 @@ var Processor = {
       }
       return this[best.anchor.type].focus(best.anchor.element, center);
     } else {
-      throw 'Reflow Error - Anchors invalid';
+      throw 'Rescroll Error - Anchors invalid';
     }
   },
   getNewSize: function(focus) {
