@@ -57,38 +57,40 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
+      margin-top: 0px;
+      margin-bottom: 20px;
       max-width: 500px;
       width: 100%;
     }
     .gif-container .gif-def {
       background: #454545;
       color: #eee;
-      padding-top: 5px;
       padding-bottom: 5px;
-      margin-top: 0px;
-      margin-bottom: 20px;
+      padding-top: 5px;
+      margin-bottom: 0;
     }
   </style>
 </head>
 <body>
   <h1 class="center">Rescroll.js</h1>
   <p class="center">Keep viewport in the right place on window resize</p>
-  <br/>
+  <p class="center">See below or <strong><a href="example.html">Try it live</a></strong></p>
   <div class="gif-container">
-    <img src="http://i.imgur.com/Fc6485U.gif">
     <h4 class="center gif-def">Without Rescroll</h4>
-    <img src="http://i.imgur.com/ZQHeVZF.gif">
+    <img src="http://i.imgur.com/Fc6485U.gif">
     <h4 class="center gif-def" gif-def>With Rescroll</h4>
+    <img src="http://i.imgur.com/ZQHeVZF.gif">
   </div>
-  <h4 class="center"><a href="example.html">Live Example</a></h4>
-  <!-- <br/> -->
+  <!-- <h4 class="center"><a href="example.html">Live Example</a></h4> -->
+  <br/>
   <h1 class="center">The Problem</h1>
   <p>
-    In many modern responsive webpages,
+    In many responsive webpages,
     elements often resize itself when user resizes viewport,
     this then causes the region user was focusing on to float out of viewport.
     Rescroll tries to solve this by scrolling back to the right position on each resize event.
   </p>
+  <br/>
   <h1 class="center">Try it</h1>
   <p><b>1. </b> Go to <a href="https://en.wikipedia.org/wiki/Art_Nouveau">a random Wiki page</a> or <a href="https://medium.com/@xebothoxzz/responsive-design-thinking-56e61f2a8d2a">a random Medium article</a></p>
   <p><b>2. </b> Put this snippet on your console</p>
@@ -96,7 +98,7 @@
   <textarea rows="1" wrap="off" class="code" onclick="this.select()">!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n;n="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this,n.InitRescroll=e()}}(function(){return function e(n,t,o){function r(c,u){if(!t[c]){if(!n[c]){var d="function"==typeof require&&require;if(!u&&d)return d(c,!0);if(i)return i(c,!0);var l=new Error("Cannot find module '"+c+"'");throw l.code="MODULE_NOT_FOUND",l}var a=t[c]={exports:{}};n[c][0].call(a.exports,function(e){var t=n[c][1][e];return r(t?t:e)},a,a.exports,e,n,t,o)}return t[c].exports}for(var i="function"==typeof require&&require,c=0;c<o.length;c++)r(o[c]);return r}({1:[function(e,n){"use strict";function t(e){function n(){var e=o.viewPortWidthHeight();s={x:f.rX*e.w,y:f.rY*e.h},h=r.focus(y,s)}function t(){var e=o.viewPortWidthHeight();s={x:f.rX*e.w,y:f.rY*e.h};var n=r.getNewSize(h),t=(n.y2-n.y1)/(h.boundingRect.y2-h.boundingRect.y1),c={y:t*h.distanceToCenter+n.y1},u=c.y-s.y;a.scrollTop+=u,Math.abs(u)>=.5&&(i=!1)}function i(){}function c(){m=!0,n()}function u(){m=!1}function d(){e=e||{},window.addEventListener("resize",function(){m&&h&&t()}),window.addEventListener("scroll",function(){return m?i?void n():void(i=!0):void 0}),n()}var l={scrollTarget:document[o.documentScrollTarget()],resizeTarget:window,anchors:null,center:{rX:.5,rY:.5}};e=e||{};var a=e.scrollTarget||l.scrollTarget,y=(e.resizeTarget||l.resizeTarget,e.anchors||l.anchors),f={rX:e.focusCenterX||l.center.rX,rY:e.focusCenterY||l.center.rY},s={x:null,y:null},g={},i=!0,h=null,m=!0;return d(),g.rescroll=t,g.updateFocus=n,g.activate=c,g.deactivate=u,g}var o={viewPortWidthHeight:function(){var e,n;return"undefined"!=typeof window.innerWidth?(e=window.innerWidth,n=window.innerHeight):"undefined"!=typeof document.documentElement&&"undefined"!=typeof document.documentElement.clientWidth&&0!==document.documentElement.clientWidth?(e=document.documentElement.clientWidth,n=document.documentElement.clientHeight):(e=document.getElementsByTagName("body")[0].clientWidth,n=document.getElementsByTagName("body")[0].clientHeight),{w:e,h:n}},documentScrollTarget:function(){return document.body.scrollTop+=1,0===document.body.scrollTop?"documentElement":(document.body.scrollTop-=1,"body")}},r={focus:function(e,n){if(e&&e.length){if("[object Array]"===Object.prototype.toString.call(e)&&e.length){for(var t={anchor:null,value:window.innerHeight},o=!1,i=0;i<e.length;i++){var c=this.Box.getBoundingRect(e[i].element);c.y1<=n.y&&c.y2>=n.y?o?c.y2-c.y1<t.value&&(t={anchor:e[i],value:c.y2-c.y1}):(t={anchor:e[i],value:c.y2-c.y1},o=!0):o||(c.y1>n.y&&c.y1-n.y<t.value?t={anchor:e[i],value:c.y1-n.y}:n.y>c.y2&&n.y-c.y2<t.value&&(t={anchor:e[i],value:n.y-c.y2}))}return this[t.anchor.type].focus(t.anchor.element,n)}throw"Reflow Error - Anchors invalid"}var u=document.elementFromPoint(n.x,n.y);return"IMAGE"===u.tagName?r.Box.focus(u,n):r.Text.focus(u,n)},getNewSize:function(e){return"Text"===e.type?this.Text.getBoundingRect(e.node):"Box"===e.type?this.Box.getBoundingRect(e.element):void 0},Text:{getTextNodesIn:function(e){var n=[];if(3==e.nodeType)n.push(e);else for(var t=e.childNodes,o=0,r=t.length;r>o;++o)n.push.apply(n,this.getTextNodesIn(t[o]));return n},getBoundingRect:function(e){var n=document.createRange();n.selectNodeContents(e);var t=n.getClientRects();return t[0]?{y1:t[0].top,y2:t[t.length-1].bottom}:!1},focus:function(e,n){if(document.createRange&&window.getSelection){var t=document.createRange();t.selectNodeContents(e);for(var o,r,i,c,u=this.getTextNodesIn(e),d={node:null,boundingRect:null,pos:null,d:window.innerHeight},l=0;l<u.length;l++)if(i=u[l],c=this.getBoundingRect(i)){if(o=c.y1,r=c.y2,o<=n.y&&r>=n.y){d.node=i,d.boundingRect=c,d.pos=0;break}r<=n.y&&n.y-r<d.d?(d.node=i,d.boundingRect=c,d.d=Math.abs(n.y-r),d.pos=-1):o>=n.y&&o-n.y<d.d&&(d.node=i,d.boundingRect=c,d.d=Math.abs(n.y-o),d.pos=1)}return{node:d.node,type:"Text",boundingRect:d.boundingRect,distanceToCenter:n.y-o}}}},Box:{getBoundingRect:function(e){var n=e.getBoundingClientRect();return{y1:n.top,y2:n.bottom}},focus:function(e,n){var t=this.getBoundingRect(e);return{element:e,type:"Box",boundingRect:t,distanceToCenter:n.y-t.y1}}}};n.exports=t},{}]},{},[1])(1)}),function(){for(var e=[],n=document.querySelectorAll("p"),t=0;t<n.length;t++)e.push({element:n[t],type:"Box"});InitRescroll({anchors:e})}();</textarea>
   <br/>
   <h1 class="center"><a href="http://github.com/marani/rescroll">Installation & API docs </a></h1>
-  <p class="center">Created by <a href="http://github.com/marani">marani</a></p>
+  <p class="center">Created by <a href="http://marani.github.io">Marani</a></p>
   <a href="https://github.com/marani/rescroll"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 </body>
 </html>
